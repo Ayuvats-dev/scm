@@ -26,10 +26,12 @@ public class AuthFailtureHandler implements AuthenticationFailureHandler {
 
             // user is disabled
             HttpSession session = request.getSession();
+            Message message = new Message();
+            message.setContent("User is disabled, Email with  varification link is sent on your email id");
+            message.setType(MessageType.red);
+
             session.setAttribute("message",
-                    Message.builder()
-                            .content("User is disabled, Email with  varification link is sent on your email id !!")
-                            .type(MessageType.red).build());
+                    message);
 
             response.sendRedirect("/login");
         } else {

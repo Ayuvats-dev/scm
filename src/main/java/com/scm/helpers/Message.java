@@ -1,20 +1,44 @@
 package com.scm.helpers;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Builder
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Message {
 
     private String content;
-    @Builder.Default
-    private MessageType type = MessageType.blue;
+    private MessageType type = MessageType.blue; // default to blue
 
+    // No-arg constructor
+    public Message() {
+    }
+
+    // All-arg constructor
+    public Message(String content, MessageType type) {
+        this.content = content;
+        this.type = type;
+    }
+
+    // Getters
+    public String getContent() {
+        return content;
+    }
+
+    public MessageType getType() {
+        return type;
+    }
+
+    // Setters
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setType(MessageType type) {
+        this.type = type;
+    }
+
+    // toString (optional)
+    @Override
+    public String toString() {
+        return "Message{" +
+                "content='" + content + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }

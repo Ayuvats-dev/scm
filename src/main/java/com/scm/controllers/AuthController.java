@@ -35,25 +35,24 @@ public class AuthController {
                 user.setEmailVerified(true);
                 user.setEnabled(true);
                 userRepo.save(user);
-                session.setAttribute("message", Message.builder()
-                        .type(MessageType.green)
-                        .content("You email is verified. Now you can login  ")
-                        .build());
+                Message message = new Message();
+                message.setContent("You email is verified. Now you can login");
+                message.setType(MessageType.green);
+
+                session.setAttribute("message", message);
                 return "success_page";
             }
-
-            session.setAttribute("message", Message.builder()
-                    .type(MessageType.red)
-                    .content("Email not verified ! Token is not associated with user .")
-                    .build());
+            Message message = new Message();
+            message.setContent("Email not verified ! Token is not associated with user .");
+            message.setType(MessageType.red);
+            session.setAttribute("message",message);
             return "error_page";
 
         }
-
-        session.setAttribute("message", Message.builder()
-                .type(MessageType.red)
-                .content("Email not verified ! Token is not associated with user .")
-                .build());
+        Message message = new Message();
+        message.setContent("Email not verified ! Token is not associated with user .");
+        message.setType(MessageType.red);
+        session.setAttribute("message", message);
 
         return "error_page";
     }

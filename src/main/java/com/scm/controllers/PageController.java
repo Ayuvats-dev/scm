@@ -117,6 +117,7 @@ public class PageController {
 
         User user = new User();
         user.setName(userForm.getName());
+
         user.setEmail(userForm.getEmail());
         user.setPassword(userForm.getPassword());
         user.setAbout(userForm.getAbout());
@@ -133,7 +134,8 @@ public class PageController {
 
         // add the message:
 
-        Message message = Message.builder().content("Registration Successful").type(MessageType.green).build();
+        Message message = new Message("Registration Successful", MessageType.green);
+
 
         session.setAttribute("message", message);
 

@@ -66,11 +66,11 @@ public class ContactController {
         if (result.hasErrors()) {
 
             result.getAllErrors().forEach(error -> logger.info(error.toString()));
+            Message message = new Message();
+            message.setContent("Please correct the following errors");
+            message.setType(MessageType.green);
 
-            session.setAttribute("message", Message.builder()
-                    .content("Please correct the following errors")
-                    .type(MessageType.red)
-                    .build());
+            session.setAttribute("message", message);
             return "user/add_contact";
         }
 
@@ -107,12 +107,12 @@ public class ContactController {
         // 3 set the contact picture url
 
         // 4 `set message to be displayed on the view
+        Message message = new Message();
+        message.setContent("You have successfully added a new contact");
+        message.setType(MessageType.green);
 
-        session.setAttribute("message",
-                Message.builder()
-                        .content("You have successfully added a new contact")
-                        .type(MessageType.green)
-                        .build());
+        session.setAttribute("message",message);
+
 
         return "redirect:/user/contacts/add";
 
@@ -190,14 +190,11 @@ public class ContactController {
             HttpSession session) {
         contactService.delete(contactId);
         logger.info("contactId {} deleted", contactId);
+        Message message = new Message();
+        message.setContent("You have successfully added a new contact");
+        message.setType(MessageType.green);
 
-        session.setAttribute("message",
-                Message.builder()
-                        .content("Contact is Deleted successfully !! ")
-                        .type(MessageType.green)
-                        .build()
-
-        );
+        session.setAttribute("message", message);
 
         return "redirect:/user/contacts";
     }
@@ -264,8 +261,11 @@ public class ContactController {
 
         var updateCon = contactService.update(con);
         logger.info("updated contact {}", updateCon);
+        Message message = new Message();
+        message.setContent("Contact Updated !!");
+        message.setType(MessageType.green);
 
-        model.addAttribute("message", Message.builder().content("Contact Updated !!").type(MessageType.green).build());
+        model.addAttribute("message", message);
 
         return "redirect:/user/contacts/view/" + contactId;
     }
