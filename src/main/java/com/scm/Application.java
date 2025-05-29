@@ -28,6 +28,11 @@ public class Application  implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		System.out.println("EMAIL_USERNAME (env): " + System.getenv("EMAIL_USERNAME"));
+		System.out.println("EMAIL_PASSWORD (env): " + System.getenv("EMAIL_PASSWORD"));
+		System.out.println("spring.mail.username (Spring): " + System.getProperty("spring.mail.username"));
+		System.out.println("spring.mail.password (Spring): " + System.getProperty("spring.mail.password"));
 		User user = new User();
 		user.setUserId(UUID.randomUUID().toString());
 		user.setName("admin");
@@ -43,6 +48,7 @@ public class Application  implements CommandLineRunner {
 			userRepo.save(user);
 			System.out.println("user created");
 		});
+
 
 
 	}
